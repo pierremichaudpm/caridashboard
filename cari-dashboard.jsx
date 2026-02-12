@@ -2113,15 +2113,15 @@ export default function CARIDashboard() {
       <style>{`
         @media (max-width: 640px) {
           .tab-label { font-size: 11px !important; }
-          .cari-logo { height: 64px !important; }
+          .cari-logo { height: 77px !important; }
           .tab-bar { overflow-x: auto !important; max-width: calc(100vw - 32px) !important; }
           .tab-btn { padding: 6px 10px !important; white-space: nowrap; }
         }
         @media (min-width: 641px) and (max-width: 1023px) {
-          .cari-logo { height: 80px !important; }
+          .cari-logo { height: 96px !important; }
         }
         @media (min-width: 1024px) {
-          .cari-logo { height: 88px !important; }
+          .cari-logo { height: 106px !important; }
         }
       `}</style>
     </div>
