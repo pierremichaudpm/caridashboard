@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import CARIDashboard from './cari-dashboard.jsx'
+import App from './src/App'
 
-ReactDOM.createRoot(document.getElementById('root')).render(<CARIDashboard />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
