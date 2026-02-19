@@ -112,7 +112,7 @@ function PinScreen({ onUnlock }) {
   return (
     <div style={{ minHeight: "100vh", background: COLORS.bg, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'DM Sans', sans-serif" }}>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      <form onSubmit={handleSubmit} style={{ background: COLORS.card, borderRadius: 20, padding: 40, border: `1px solid ${COLORS.border}`, width: 340, textAlign: "center" }}>
+      <form onSubmit={handleSubmit} style={{ background: COLORS.card, borderRadius: 20, padding: "32px 24px", border: `1px solid ${COLORS.border}`, width: 340, maxWidth: "90vw", textAlign: "center" }}>
         <img src="/CARI_Horizontal_RGB_reverse.png" alt="CARI" style={{ height: 60, marginBottom: 20 }} />
         <h2 style={{ color: COLORS.text, fontSize: 18, marginBottom: 8 }}>Saisie des visites</h2>
         <p style={{ color: COLORS.textMuted, fontSize: 13, marginBottom: 24 }}>Entrez le code d'accès</p>
@@ -201,9 +201,9 @@ export default function Saisie() {
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       {/* Header */}
-      <header style={{ padding: "20px 24px", borderBottom: `1px solid ${COLORS.border}`, background: COLORS.card, display: "flex", alignItems: "center", gap: 16 }}>
-        <img src="/CARI_Horizontal_RGB_reverse.png" alt="CARI" style={{ height: 100 }} />
-        <span style={{ fontSize: 26, fontWeight: 700, fontFamily: "'DM Sans', sans-serif" }}>Saisie des visites</span>
+      <header className="saisie-header" style={{ padding: "20px 24px", borderBottom: `1px solid ${COLORS.border}`, background: COLORS.card, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+        <img src="/CARI_Horizontal_RGB_reverse.png" alt="CARI" className="saisie-logo" style={{ height: 100 }} />
+        <span className="saisie-title" style={{ fontSize: 26, fontWeight: 700, fontFamily: "'DM Sans', sans-serif" }}>Saisie des visites</span>
       </header>
 
       <main style={{ maxWidth: 600, margin: "0 auto", padding: "20px 16px" }}>
@@ -326,12 +326,12 @@ export default function Saisie() {
             <h3 style={{ fontSize: 14, fontWeight: 600, color: COLORS.textMuted, marginBottom: 12 }}>Dernières saisies</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {dernieres.map(d => (
-                <div key={d.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 12px", background: COLORS.bg, borderRadius: 8, fontSize: 13 }}>
-                  <span style={{ color: COLORS.accent, fontWeight: 600, minWidth: 40 }}>{d.heure}</span>
+                <div key={d.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", background: COLORS.bg, borderRadius: 8, fontSize: 13, flexWrap: "wrap" }}>
+                  <span style={{ color: COLORS.accent, fontWeight: 600 }}>{d.heure}</span>
                   <span style={{ color: COLORS.text, fontWeight: 500 }}>{d.conseiller || "—"}</span>
-                  <span style={{ color: COLORS.textMuted }}>—</span>
+                  <span style={{ color: COLORS.textMuted }}>·</span>
                   <span style={{ color: COLORS.text }}>{d.service}</span>
-                  <span style={{ color: COLORS.textMuted }}>—</span>
+                  <span style={{ color: COLORS.textMuted }}>·</span>
                   <span style={{ color: COLORS.textMuted }}>{d.statut}</span>
                   {d.nouveau && <span style={{ background: "rgba(108,186,199,0.2)", color: COLORS.accent, padding: "1px 6px", borderRadius: 4, fontSize: 11, fontWeight: 600 }}>nouveau</span>}
                 </div>
@@ -340,6 +340,18 @@ export default function Saisie() {
           </div>
         )}
       </main>
+
+      <style>{`
+        @media (max-width: 480px) {
+          .saisie-header { padding: 14px 16px !important; gap: 10px !important; }
+          .saisie-logo { height: 60px !important; }
+          .saisie-title { fontSize: 18px !important; font-size: 18px !important; }
+        }
+        @media (min-width: 481px) and (max-width: 768px) {
+          .saisie-logo { height: 80px !important; }
+          .saisie-title { font-size: 22px !important; }
+        }
+      `}</style>
     </div>
   );
 }

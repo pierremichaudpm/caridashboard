@@ -526,7 +526,7 @@ export default function Dashboard() {
               </ResponsiveContainer>
             </Section>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
+            <div className="dash-grid-2col">
               <Section title="Volume mensuel" subtitle="Avec et sans rendez-vous par mois">
                 <ResponsiveContainer width="100%" height={280}>
                   <BarChart data={monthly} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
@@ -546,7 +546,7 @@ export default function Dashboard() {
             </div>
 
             {/* ───── Section RDV ───── */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
+            <div className="dash-grid-2col">
               <Section title="Rendez-vous — Ce mois" subtitle={`${dernierMois.mois}: ${dernierMois.rdv} avec RDV vs ${dernierMois.sans_rdv} sans RDV`}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
                   <div style={{ background: COLORS.bg, borderRadius: 12, padding: 16, textAlign: "center" }}>
@@ -591,7 +591,7 @@ export default function Dashboard() {
               <KpiCard label="Emploi" value={services[2]?.value || 0} sub={`${services[2]?.pct || '—'} du total`} icon={<Briefcase size={18} />} color={COLORS.vermillon} />
               <KpiCard label="Autres services" value={services.slice(3).reduce((s, x) => s + x.value, 0)} sub={`${(services.slice(3).reduce((s, x) => s + x.value, 0) / totalVisites * 100).toFixed(1)}% du total`} icon={<ClipboardList size={18} />} color={COLORS.brume} />
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
+            <div className="dash-grid-2col">
               <Section title="Services demandés" subtitle={`Distribution complète des ${totalVisites.toLocaleString("fr-CA")} demandes`}>
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
@@ -662,7 +662,7 @@ export default function Dashboard() {
                 </>;
               })()}
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
+            <div className="dash-grid-2col">
               <Section title="Statut d'immigration" subtitle="Profil de la clientèle par statut">
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
@@ -734,7 +734,7 @@ export default function Dashboard() {
                 </BarChart>
               </ResponsiveContainer>
             </Section>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
+            <div className="dash-grid-2col">
               <Section title="Moyenne par jour de semaine" subtitle="Volume moyen de visites par jour ouvrable">
                 <ResponsiveContainer width="100%" height={240}>
                   <BarChart data={dowAvg} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
@@ -786,7 +786,7 @@ export default function Dashboard() {
               <KpiCard label="Conversion nouv. → récurrent" value="~62 %" sub="Estimé: nouveaux qui reviennent" icon={<Repeat size={18} />} color={COLORS.brume} />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
+            <div className="dash-grid-2col">
               <Section title="Services × Statut d'immigration" subtitle="L'Emploi est dominé par les résidents permanents, l'Accueil par les demandeurs d'asile">
                 <ServicesStatutChart data={servicesStatut} />
               </Section>
@@ -795,7 +795,7 @@ export default function Dashboard() {
               </Section>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
+            <div className="dash-grid-2col">
               <Section title="Taux de nouveaux clients par statut" subtitle="Les visiteurs ont le taux le plus élevé, les dem. d'asile acc. le plus bas">
                 <NouveauxParStatutChart data={nouveauxParStatut} />
               </Section>
@@ -940,7 +940,7 @@ export default function Dashboard() {
               </div>
             </Section>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
+            <div className="dash-grid-2col">
               {/* Tendance mensuelle par conseiller */}
               <Section title="Tendance mensuelle par conseiller" subtitle="Évolution de la charge dans le temps">
                 <ResponsiveContainer width="100%" height={300}>
@@ -995,11 +995,23 @@ export default function Dashboard() {
       </main>
 
       <style>{`
+        .dash-grid-2col {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+          gap: 20px;
+        }
         @media (max-width: 640px) {
-          .tab-label { font-size: 11px !important; }
-          .cari-logo { height: 77px !important; }
-          .tab-bar { overflow-x: auto !important; max-width: calc(100vw - 32px) !important; }
-          .tab-btn { padding: 6px 10px !important; white-space: nowrap; }
+          .tab-label { font-size: 10px !important; }
+          .cari-logo { height: 60px !important; }
+          .tab-bar {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 4px !important;
+            max-width: 100% !important;
+            padding: 4px !important;
+          }
+          .tab-btn { padding: 6px 4px !important; white-space: nowrap; justify-content: center; }
+          .dash-grid-2col { grid-template-columns: 1fr !important; }
         }
         @media (min-width: 641px) and (max-width: 1023px) {
           .cari-logo { height: 96px !important; }
