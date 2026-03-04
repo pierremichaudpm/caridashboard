@@ -130,6 +130,9 @@ function PinScreen({ onUnlock }) {
 
 export default function Saisie() {
   const [authed, setAuthed] = useState(() => sessionStorage.getItem("cari_auth") === "1");
+  const [activeTab, setActiveTab] = useState("saisie");
+
+  // — Saisie visite state —
   const [conseiller, setConseiller] = useState("");
   const [conseillerAutre, setConseillerAutre] = useState("");
   const [service, setService] = useState("");
@@ -144,6 +147,16 @@ export default function Saisie() {
   const [confirmation, setConfirmation] = useState(null);
   const [dernieres, setDernieres] = useState([]);
   const serviceRef = useRef(null);
+
+  // — Message conseiller state —
+  const [msgNom, setMsgNom] = useState("");
+  const [msgEmail, setMsgEmail] = useState("");
+  const [msgTel, setMsgTel] = useState("");
+  const [msgConseiller, setMsgConseiller] = useState("");
+  const [msgTexte, setMsgTexte] = useState("");
+  const [msgSaving, setMsgSaving] = useState(false);
+  const [msgConfirmation, setMsgConfirmation] = useState(null);
+  const [derniersMessages, setDerniersMessages] = useState([]);
 
   const isAssermentation = service === "Assermentation";
   const sousServicesGroups = SOUS_SERVICES[service] || null;
@@ -194,6 +207,45 @@ export default function Saisie() {
     setSaving(false);
   };
 
+  // — Message conseiller handlers —
+  const resetMessageForm = () => {
+    setMsgNom(""); setMsgEmail(""); setMsgTel(""); setMsgTexte("");
+    // On garde le conseiller sélectionné entre les messages
+  };
+
+  const handleMessageSubmit = async (e) => {
+    e.preventDefault();
+    if (!msgNom || !msgConseiller || !msgTexte) return;
+
+    setMsgSaving(true);
+
+    try {
+      if (supabase) {
+        await supabase.from("messages_accueil").insert({
+          nom_visiteur: msgNom,
+          email_visiteur: msgEmail || null,
+          telephone: msgTel || null,
+          conseiller: msgConseiller,
+          message: msgTexte,
+        });
+      }
+    } catch (err) {
+      console.error("Erreur Supabase:", err);
+    }
+
+    const now = new Date();
+    const heure = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+    setDerniersMessages(prev => [
+      { heure, nom: msgNom, conseiller: msgConseiller, message: msgTexte.slice(0, 50), id: Date.now() },
+      ...prev.slice(0, 9),
+    ]);
+
+    setMsgConfirmation("Message envoyé !");
+    setTimeout(() => setMsgConfirmation(null), 2500);
+    resetMessageForm();
+    setMsgSaving(false);
+  };
+
   if (!authed) return <PinScreen onUnlock={() => setAuthed(true)} />;
 
   return (
@@ -203,17 +255,50 @@ export default function Saisie() {
       {/* Header */}
       <header className="saisie-header" style={{ padding: "20px 24px", borderBottom: `1px solid ${COLORS.border}`, background: COLORS.card, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
         <img src="/CARI_Horizontal_RGB_reverse.png" alt="CARI" className="saisie-logo" style={{ height: 100 }} />
-        <span className="saisie-title" style={{ fontSize: 26, fontWeight: 700, fontFamily: "'DM Sans', sans-serif" }}>Saisie des visites</span>
+        <span className="saisie-title" style={{ fontSize: 26, fontWeight: 700, fontFamily: "'DM Sans', sans-serif" }}>
+          {activeTab === "saisie" ? "Saisie des visites" : "Message conseiller"}
+        </span>
       </header>
 
-      <main style={{ maxWidth: 600, margin: "0 auto", padding: "20px 16px" }}>
-        {/* Confirmation */}
-        {confirmation && (
+      {/* Onglets */}
+      <div style={{ maxWidth: 600, margin: "0 auto", padding: "16px 16px 0" }}>
+        <div style={{ display: "flex", gap: 0, borderRadius: 12, overflow: "hidden", border: `1px solid ${COLORS.border}` }}>
+          {[
+            { key: "saisie", label: "Saisie visite" },
+            { key: "message", label: "Message conseiller" },
+          ].map(tab => (
+            <button key={tab.key} type="button" onClick={() => setActiveTab(tab.key)}
+              style={{
+                flex: 1, padding: "12px 16px", border: "none",
+                background: activeTab === tab.key ? COLORS.accent : COLORS.card,
+                color: activeTab === tab.key ? "#263164" : COLORS.textMuted,
+                fontSize: 14, fontWeight: 700, cursor: "pointer",
+                fontFamily: "'DM Sans', sans-serif", transition: "all 0.15s",
+              }}>
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <main style={{ maxWidth: 600, margin: "0 auto", padding: "16px 16px 20px" }}>
+        {/* Confirmation (saisie) */}
+        {activeTab === "saisie" && confirmation && (
           <div style={{ background: "rgba(108,186,199,0.15)", border: `1px solid ${COLORS.accent}`, borderRadius: 12, padding: "14px 20px", marginBottom: 16, textAlign: "center", fontSize: 15, fontWeight: 600, color: COLORS.accent }}>
             {confirmation}
           </div>
         )}
 
+        {/* Confirmation (message) */}
+        {activeTab === "message" && msgConfirmation && (
+          <div style={{ background: "rgba(108,186,199,0.15)", border: `1px solid ${COLORS.accent}`, borderRadius: 12, padding: "14px 20px", marginBottom: 16, textAlign: "center", fontSize: 15, fontWeight: 600, color: COLORS.accent }}>
+            {msgConfirmation}
+          </div>
+        )}
+
+        {/* ═══ ONGLET SAISIE ═══ */}
+        {activeTab === "saisie" && (
+        <>
         <form onSubmit={handleSubmit} style={{ background: COLORS.card, borderRadius: 16, padding: 24, border: `1px solid ${COLORS.border}`, display: "flex", flexDirection: "column", gap: 18 }}>
           {/* Conseiller */}
           <div>
@@ -338,6 +423,82 @@ export default function Saisie() {
               ))}
             </div>
           </div>
+        )}
+        </>
+        )}
+
+        {/* ═══ ONGLET MESSAGE ═══ */}
+        {activeTab === "message" && (
+        <>
+        <form onSubmit={handleMessageSubmit} style={{ background: COLORS.card, borderRadius: 16, padding: 24, border: `1px solid ${COLORS.border}`, display: "flex", flexDirection: "column", gap: 18 }}>
+          {/* Nom visiteur */}
+          <div>
+            <label style={labelStyle}>Nom du visiteur *</label>
+            <input type="text" value={msgNom} onChange={(e) => setMsgNom(e.target.value)} placeholder="Nom complet" required style={inputStyle} />
+          </div>
+
+          {/* Email visiteur */}
+          <div>
+            <label style={labelStyle}>Email du visiteur</label>
+            <input type="email" value={msgEmail} onChange={(e) => setMsgEmail(e.target.value)} placeholder="exemple@courriel.com" style={inputStyle} />
+          </div>
+
+          {/* Téléphone */}
+          <div>
+            <label style={labelStyle}>Téléphone</label>
+            <input type="tel" value={msgTel} onChange={(e) => setMsgTel(e.target.value)} placeholder="Optionnel" style={inputStyle} />
+          </div>
+
+          <hr style={{ border: "none", borderTop: `1px solid ${COLORS.border}`, margin: "4px 0" }} />
+
+          {/* Conseiller destinataire */}
+          <div>
+            <label style={labelStyle}>Conseiller destinataire *</label>
+            <select value={msgConseiller} onChange={(e) => setMsgConseiller(e.target.value)} required style={inputStyle}>
+              <option value="">— Choisir le conseiller —</option>
+              {CONSEILLERS.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+
+          {/* Message */}
+          <div>
+            <label style={labelStyle}>Message / Motif de la visite *</label>
+            <textarea value={msgTexte} onChange={(e) => setMsgTexte(e.target.value)} placeholder="Décrivez le motif de la visite..." required rows={4} style={{ ...inputStyle, resize: "vertical" }} />
+          </div>
+
+          {/* Submit */}
+          <button type="submit" disabled={msgSaving || !msgNom || !msgConseiller || !msgTexte}
+            style={{
+              width: "100%", padding: 16, borderRadius: 14, border: "none",
+              background: (!msgNom || !msgConseiller || !msgTexte) ? COLORS.border : COLORS.accent,
+              color: (!msgNom || !msgConseiller || !msgTexte) ? COLORS.textMuted : "#263164",
+              fontSize: 17, fontWeight: 700, cursor: (!msgNom || !msgConseiller || !msgTexte) ? "not-allowed" : "pointer",
+              fontFamily: "inherit", transition: "all 0.2s",
+              boxShadow: (msgNom && msgConseiller && msgTexte) ? `0 4px 20px ${COLORS.accent}33` : "none",
+            }}>
+            {msgSaving ? "Envoi en cours..." : "ENVOYER LE MESSAGE"}
+          </button>
+        </form>
+
+        {/* Derniers messages */}
+        {derniersMessages.length > 0 && (
+          <div style={{ marginTop: 24, background: COLORS.card, borderRadius: 16, padding: 20, border: `1px solid ${COLORS.border}` }}>
+            <h3 style={{ fontSize: 14, fontWeight: 600, color: COLORS.textMuted, marginBottom: 12 }}>Derniers messages</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {derniersMessages.map(d => (
+                <div key={d.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", background: COLORS.bg, borderRadius: 8, fontSize: 13, flexWrap: "wrap" }}>
+                  <span style={{ color: COLORS.accent, fontWeight: 600 }}>{d.heure}</span>
+                  <span style={{ color: COLORS.text, fontWeight: 500 }}>{d.nom}</span>
+                  <span style={{ color: COLORS.textMuted }}>→</span>
+                  <span style={{ color: COLORS.gold, fontWeight: 600 }}>{d.conseiller}</span>
+                  <span style={{ color: COLORS.textMuted }}>·</span>
+                  <span style={{ color: COLORS.textMuted }}>{d.message}{d.message.length >= 50 ? "…" : ""}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        </>
         )}
       </main>
 
