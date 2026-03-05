@@ -24,29 +24,36 @@ import {
    Remplacées par données live quand Supabase est branché
    ═══════════════════════════════════════════════════════════ */
 const CONSEILLERS_DATA = [
-  { nom: "Ran", visites: 2840, service: "Accueil", nouveaux: 820, existants: 2020, rdv: 1120 },
-  { nom: "Iryna", visites: 2310, service: "Accueil", nouveaux: 690, existants: 1620, rdv: 940 },
-  { nom: "Sadia", visites: 1950, service: "Accueil", nouveaux: 510, existants: 1440, rdv: 780 },
-  { nom: "Dian", visites: 1680, service: "Accueil", nouveaux: 480, existants: 1200, rdv: 670 },
-  { nom: "Merzouk", visites: 1420, service: "Accueil", nouveaux: 390, existants: 1030, rdv: 570 },
-  { nom: "Farah", visites: 1210, service: "Emploi", nouveaux: 280, existants: 930, rdv: 580 },
-  { nom: "Safaa", visites: 980, service: "Accueil", nouveaux: 240, existants: 740, rdv: 390 },
-  { nom: "Taous", visites: 870, service: "Accueil", nouveaux: 190, existants: 680, rdv: 350 },
-  { nom: "Hakima", visites: 760, service: "Francisation", nouveaux: 160, existants: 600, rdv: 300 },
-  { nom: "Faten", visites: 2425, service: "Assermentation", nouveaux: 580, existants: 1845, rdv: 15 },
+  // Groupe 1 — Chef : Natalia Tonofrei
+  { nom: "Natalia Tonofrei", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Olga Elena Olivares", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Diego Jimenez", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Isabel Santamaria", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Ikram Houmair", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Trisha Luckheenarain", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Iryna Sola", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Iryna Kravchenko", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Li Xin Wang", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Hala Al Husseini", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  // Groupe 2 — Chef : Priscilla Bheekha-Canakiah
+  { nom: "Priscilla Bheekha-Canakiah", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Dian Diallo", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Kani Touré", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Sadia Milsaint", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Merzouk Dahmoun", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Najla Bourara", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Rania Khaddour", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Yiqiao Ran", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Imane Amriou", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Fatou Kine Ciss", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  // Autres
+  { nom: "Faten Makhlouf", visites: 0, service: "ICI Santé", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Abeer Halabi", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Nadine Jabbour", visites: 0, service: "Assermentation", nouveaux: 0, existants: 0, rdv: 0 },
 ];
 
 const CONSEILLERS_MONTHLY = [
-  { mois: "Mai", Ran: 310, Iryna: 250, Sadia: 210, Dian: 180, Faten: 260, Farah: 130 },
-  { mois: "Juin", Ran: 320, Iryna: 260, Sadia: 220, Dian: 190, Faten: 270, Farah: 135 },
-  { mois: "Juil", Ran: 330, Iryna: 270, Sadia: 225, Dian: 195, Faten: 280, Farah: 140 },
-  { mois: "Août", Ran: 280, Iryna: 230, Sadia: 190, Dian: 165, Faten: 240, Farah: 120 },
-  { mois: "Sep", Ran: 275, Iryna: 225, Sadia: 185, Dian: 160, Faten: 235, Farah: 115 },
-  { mois: "Oct", Ran: 270, Iryna: 220, Sadia: 180, Dian: 155, Faten: 230, Farah: 110 },
-  { mois: "Nov", Ran: 220, Iryna: 180, Sadia: 150, Dian: 130, Faten: 190, Farah: 90 },
-  { mois: "Déc", Ran: 190, Iryna: 155, Sadia: 130, Dian: 110, Faten: 165, Farah: 80 },
-  { mois: "Jan", Ran: 340, Iryna: 280, Sadia: 230, Dian: 200, Faten: 290, Farah: 145 },
-  { mois: "Fév", Ran: 305, Iryna: 240, Sadia: 230, Dian: 195, Faten: 265, Farah: 145 },
+  { mois: "Mars" },
 ];
 
 const SOUS_SERVICES_ACCUEIL = [
