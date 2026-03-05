@@ -75,9 +75,60 @@ const STATUTS = [
   "Citoyen canadien", "Visiteur", "Autre",
 ];
 
-const CONSEILLERS = [
-  "Ran", "Iryna", "Sadia", "Dian", "Merzouk", "Farah", "Safaa", "Taous", "Hakima", "Faten",
-];
+const EQUIPES = {
+  "Groupe 1": {
+    chef: { nom: "Natalia Tonofrei", email: "ntonofrei@cari.qc.ca" },
+    conseillers: [
+      { nom: "Olga Elena Olivares Ramirez", email: "oolivares@cari.qc.ca" },
+      { nom: "Diego Jimenez", email: "djimenez@cari.qc.ca" },
+      { nom: "Isabel Santamaria", email: "isantamaria@cari.qc.ca" },
+      { nom: "Ikram Houmair", email: "ihoumair@cari.qc.ca" },
+      { nom: "Trisha Luckheenarain", email: "tluckheenarain@cari.qc.ca" },
+      { nom: "Iryna Sola", email: "isola@cari.qc.ca" },
+      { nom: "Iryna Kravchenko", email: "ikravchenko@cari.qc.ca" },
+      { nom: "Li Xin Wang", email: "lwang@cari.qc.ca" },
+      { nom: "Hala Al Husseini", email: "halhusseini@cari.qc.ca" },
+    ],
+  },
+  "Groupe 2": {
+    chef: { nom: "Priscilla Bheekha-Canakiah", email: "pbheekha-canakiah@cari.qc.ca" },
+    conseillers: [
+      { nom: "Dian Diallo", email: "ddiallo@cari.qc.ca" },
+      { nom: "Kani Touré", email: "ktoure@cari.qc.ca" },
+      { nom: "Sadia Milsaint", email: "smilsaint@cari.qc.ca" },
+      { nom: "Merzouk Dahmoun", email: "mdahmoun@cari.qc.ca" },
+      { nom: "Najla Bourara", email: "nbourara@cari.qc.ca" },
+      { nom: "Rania Khaddour", email: "rkhaddour@cari.qc.ca" },
+      { nom: "Yiqiao Ran", email: "yran@cari.qc.ca" },
+      { nom: "Imane Amriou", email: "iamriou@cari.qc.ca" },
+      { nom: "Fatou Kine Ciss", email: "fkciss@cari.qc.ca" },
+    ],
+  },
+  "Autres": {
+    chef: null,
+    conseillers: [
+      { nom: "Faten Makhlouf", email: "fmakhlouf@cari.qc.ca" },
+      { nom: "Abeer Halabi", email: "ahalabi@cari.qc.ca" },
+      { nom: "Nadine Jabbour", email: "njabbour@cari.qc.ca" },
+    ],
+  },
+};
+
+// Liste plate pour les dropdowns + lookup email/chef
+const TOUS_CONSEILLERS = Object.entries(EQUIPES).flatMap(([groupe, { chef, conseillers }]) =>
+  [...(chef ? [{ ...chef, groupe, role: "chef" }] : []), ...conseillers.map(c => ({ ...c, groupe, role: "conseiller" }))],
+);
+
+const getChefEmail = (conseillerNom) => {
+  for (const { chef, conseillers } of Object.values(EQUIPES)) {
+    const found = conseillers.find(c => c.nom === conseillerNom) || (chef && chef.nom === conseillerNom ? chef : null);
+    if (found && chef) return chef.email;
+  }
+  return null;
+};
+
+// Ancienne liste simple pour l'onglet Saisie visite (rétrocompatibilité)
+const CONSEILLERS = TOUS_CONSEILLERS.map(c => c.nom);
 
 const inputStyle = {
   width: "100%", padding: "12px 16px", borderRadius: 10, border: `1px solid ${COLORS.border}`,
@@ -150,6 +201,7 @@ export default function Saisie() {
 
   // — Message conseiller state —
   const [msgNom, setMsgNom] = useState("");
+  const [msgRef, setMsgRef] = useState("");
   const [msgEmail, setMsgEmail] = useState("");
   const [msgTel, setMsgTel] = useState("");
   const [msgConseiller, setMsgConseiller] = useState("");
@@ -209,7 +261,7 @@ export default function Saisie() {
 
   // — Message conseiller handlers —
   const resetMessageForm = () => {
-    setMsgNom(""); setMsgEmail(""); setMsgTel(""); setMsgTexte("");
+    setMsgNom(""); setMsgRef(""); setMsgEmail(""); setMsgTel(""); setMsgTexte("");
     // On garde le conseiller sélectionné entre les messages
   };
 
@@ -223,6 +275,7 @@ export default function Saisie() {
       if (supabase) {
         await supabase.from("messages_accueil").insert({
           nom_visiteur: msgNom,
+          numero_reference: msgRef || null,
           email_visiteur: msgEmail || null,
           telephone: msgTel || null,
           conseiller: msgConseiller,
@@ -236,7 +289,7 @@ export default function Saisie() {
     const now = new Date();
     const heure = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
     setDerniersMessages(prev => [
-      { heure, nom: msgNom, conseiller: msgConseiller, message: msgTexte.slice(0, 50), id: Date.now() },
+      { heure, nom: msgNom, ref: msgRef, conseiller: msgConseiller, message: msgTexte.slice(0, 50), id: Date.now() },
       ...prev.slice(0, 9),
     ]);
 
@@ -437,9 +490,15 @@ export default function Saisie() {
             <input type="text" value={msgNom} onChange={(e) => setMsgNom(e.target.value)} placeholder="Nom complet" required style={inputStyle} />
           </div>
 
+          {/* Numéro de référence */}
+          <div>
+            <label style={labelStyle}>No référence (Ceriges ou GSI)</label>
+            <input type="text" value={msgRef} onChange={(e) => setMsgRef(e.target.value)} placeholder="ex: 47859 ou G26025987413" style={inputStyle} />
+          </div>
+
           {/* Email visiteur */}
           <div>
-            <label style={labelStyle}>Email du visiteur</label>
+            <label style={labelStyle}>Courriel du visiteur</label>
             <input type="email" value={msgEmail} onChange={(e) => setMsgEmail(e.target.value)} placeholder="exemple@courriel.com" style={inputStyle} />
           </div>
 
@@ -456,7 +515,12 @@ export default function Saisie() {
             <label style={labelStyle}>Conseiller destinataire *</label>
             <select value={msgConseiller} onChange={(e) => setMsgConseiller(e.target.value)} required style={inputStyle}>
               <option value="">— Choisir le conseiller —</option>
-              {CONSEILLERS.map(c => <option key={c} value={c}>{c}</option>)}
+              {Object.entries(EQUIPES).map(([groupe, { chef, conseillers }]) => (
+                <optgroup key={groupe} label={groupe}>
+                  {chef && <option value={chef.nom}>{chef.nom} (chef d'équipe)</option>}
+                  {conseillers.map(c => <option key={c.nom} value={c.nom}>{c.nom}</option>)}
+                </optgroup>
+              ))}
             </select>
           </div>
 
@@ -489,6 +553,7 @@ export default function Saisie() {
                 <div key={d.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", background: COLORS.bg, borderRadius: 8, fontSize: 13, flexWrap: "wrap" }}>
                   <span style={{ color: COLORS.accent, fontWeight: 600 }}>{d.heure}</span>
                   <span style={{ color: COLORS.text, fontWeight: 500 }}>{d.nom}</span>
+                  {d.ref && <span style={{ color: COLORS.textMuted, fontSize: 11 }}>({d.ref})</span>}
                   <span style={{ color: COLORS.textMuted }}>→</span>
                   <span style={{ color: COLORS.gold, fontWeight: 600 }}>{d.conseiller}</span>
                   <span style={{ color: COLORS.textMuted }}>·</span>
