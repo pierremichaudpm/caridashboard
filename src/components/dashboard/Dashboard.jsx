@@ -47,6 +47,7 @@ const CONSEILLERS_DATA = [
   { nom: "Imane Amriou", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
   { nom: "Fatou Kine Ciss", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
   // Autres
+  { nom: "Aminata Christine Niane", visites: 0, service: "Coordo Accueil", nouveaux: 0, existants: 0, rdv: 0 },
   { nom: "Faten Makhlouf", visites: 0, service: "ICI Santé", nouveaux: 0, existants: 0, rdv: 0 },
   { nom: "Abeer Halabi", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
   { nom: "Nadine Jabbour", visites: 0, service: "Assermentation", nouveaux: 0, existants: 0, rdv: 0 },

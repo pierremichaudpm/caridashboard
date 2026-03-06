@@ -107,6 +107,7 @@ const EQUIPES = {
   "Autres": {
     chef: null,
     conseillers: [
+      { nom: "Aminata Christine Niane", email: "achristine-niane@cari.qc.ca" },
       { nom: "Faten Makhlouf", email: "fmakhlouf@cari.qc.ca" },
       { nom: "Abeer Halabi", email: "ahalabi@cari.qc.ca" },
       { nom: "Nadine Jabbour", email: "njabbour@cari.qc.ca" },
@@ -420,7 +421,8 @@ export default function Saisie() {
             </div>
           </div>
 
-          {/* Avec RDV */}
+          {/* Avec RDV — masqué pour Assermentation (pas de RDV) */}
+          {!isAssermentation && (
           <div>
             <label style={labelStyle}>Avec rendez-vous?</label>
             <div style={{ display: "flex", gap: 10 }}>
@@ -428,6 +430,7 @@ export default function Saisie() {
               <button type="button" onClick={() => setAvecRdv(false)} style={btnStyle(avecRdv === false)}>Non</button>
             </div>
           </div>
+          )}
 
           {/* Nom + Tél (pas en mode assermentation) */}
           {!isAssermentation && (
