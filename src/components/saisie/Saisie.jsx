@@ -110,6 +110,8 @@ const EQUIPES = {
       { nom: "Faten Makhlouf", email: "fmakhlouf@cari.qc.ca" },
       { nom: "Abeer Halabi", email: "ahalabi@cari.qc.ca" },
       { nom: "Nadine Jabbour", email: "njabbour@cari.qc.ca" },
+      { nom: "Laurence Normand", email: "lnormand@cari.qc.ca" },
+      { nom: "Tierry Nguiamba", email: "tnguiamba@cari.qc.ca" },
     ],
   },
 };
@@ -192,6 +194,8 @@ export default function Saisie() {
   const [nouveau, setNouveau] = useState(null);
   const [avecRdv, setAvecRdv] = useState(null);
   const [nomClient, setNomClient] = useState("");
+  const [refClient, setRefClient] = useState("");
+  const [emailClient, setEmailClient] = useState("");
   const [telephone, setTelephone] = useState("");
   const [notes, setNotes] = useState("");
   const [saving, setSaving] = useState(false);
@@ -216,7 +220,7 @@ export default function Saisie() {
 
   const resetForm = () => {
     setService(""); setSousService(""); setStatut(""); setNouveau(null);
-    setAvecRdv(null); setNomClient(""); setTelephone(""); setNotes("");
+    setAvecRdv(null); setNomClient(""); setRefClient(""); setEmailClient(""); setTelephone(""); setNotes("");
     // On garde le conseiller sélectionné entre les saisies
     setTimeout(() => serviceRef.current?.focus(), 100);
   };
@@ -236,6 +240,8 @@ export default function Saisie() {
           nouveau_client: nouveau ?? false,
           avec_rdv: avecRdv ?? false,
           nom_client: nomClient || null,
+          numero_reference: refClient || null,
+          email_client: emailClient || null,
           telephone: telephone || null,
           notes: notes || null,
           conseiller: conseillerFinal || null,
@@ -430,6 +436,14 @@ export default function Saisie() {
               <div>
                 <label style={labelStyle}>Nom client</label>
                 <input type="text" value={nomClient} onChange={(e) => setNomClient(e.target.value)} placeholder="Optionnel" style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>No référence (Ceriges ou GSI)</label>
+                <input type="text" value={refClient} onChange={(e) => setRefClient(e.target.value)} placeholder="ex: 47859 ou G26025987413" style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>Courriel du visiteur</label>
+                <input type="email" value={emailClient} onChange={(e) => setEmailClient(e.target.value)} placeholder="exemple@courriel.com" style={inputStyle} />
               </div>
               <div>
                 <label style={labelStyle}>Téléphone</label>

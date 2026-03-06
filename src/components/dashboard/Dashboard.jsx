@@ -50,6 +50,8 @@ const CONSEILLERS_DATA = [
   { nom: "Faten Makhlouf", visites: 0, service: "ICI Santé", nouveaux: 0, existants: 0, rdv: 0 },
   { nom: "Abeer Halabi", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
   { nom: "Nadine Jabbour", visites: 0, service: "Assermentation", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Laurence Normand", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
+  { nom: "Tierry Nguiamba", visites: 0, service: "Accueil", nouveaux: 0, existants: 0, rdv: 0 },
 ];
 
 const CONSEILLERS_MONTHLY = [
