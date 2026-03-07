@@ -113,6 +113,7 @@ const EQUIPES = {
       { nom: "Nadine Jabbour", email: "njabbour@cari.qc.ca" },
       { nom: "Laurence Normand", email: "lnormand@cari.qc.ca" },
       { nom: "Tierry Nguiamba", email: "tnguiamba@cari.qc.ca" },
+      { nom: "Pierre Michaud (TEST)", email: "pmichaud@cari.qc.ca" },
     ],
   },
 };

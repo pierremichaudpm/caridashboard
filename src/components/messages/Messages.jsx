@@ -24,7 +24,7 @@ const EQUIPES = {
     chef: null,
     conseillers: [
       "Aminata Christine Niane", "Faten Makhlouf", "Abeer Halabi",
-      "Nadine Jabbour", "Laurence Normand", "Tierry Nguiamba",
+      "Nadine Jabbour", "Laurence Normand", "Tierry Nguiamba", "Pierre Michaud (TEST)",
     ],
   },
 };
