@@ -336,14 +336,15 @@ export default function Saisie() {
       <header className="saisie-header" style={{ padding: "20px 24px", borderBottom: `1px solid ${COLORS.border}`, background: COLORS.card, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
         <img src="/CARI_Horizontal_RGB_reverse.png" alt="CARI" className="saisie-logo" style={{ height: 100 }} />
         <span className="saisie-title" style={{ fontSize: 26, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", flex: 1 }}>
-          {activeTab === "saisie" ? "Saisie des visites" : "Message conseiller"}
+          Saisie des visites
         </span>
-        <a href="/messages" style={{ color: COLORS.accent, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
+        {/* TODO: Réactiver quand DNS cari.qc.ca vérifié dans Resend */}
+        {/* <a href="/messages" style={{ color: COLORS.accent, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
           Voir messages →
-        </a>
+        </a> */}
       </header>
 
-      {/* Onglets */}
+      {/* TODO: Réactiver onglets quand DNS cari.qc.ca vérifié dans Resend
       <div style={{ maxWidth: 600, margin: "0 auto", padding: "16px 16px 0" }}>
         <div style={{ display: "flex", gap: 0, borderRadius: 12, overflow: "hidden", border: `1px solid ${COLORS.border}` }}>
           {[
@@ -363,6 +364,7 @@ export default function Saisie() {
           ))}
         </div>
       </div>
+      */}
 
       <main style={{ maxWidth: 600, margin: "0 auto", padding: "16px 16px 20px" }}>
         {/* Confirmation (saisie) */}
