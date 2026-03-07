@@ -1,21 +1,22 @@
 /* ═══════════════════════════════════════════════════════════
    DONNÉES STATIQUES — Extraites du fichier Excel CARI-KPIs-Dashboard.xlsx
-   Période: 1 mai 2025 → 19 février 2026
-   Total: 16 055 visites · 199 jours
+   Période: 1 mai 2025 → 6 mars 2026
+   Total: 17 222 visites · 211 jours
    Source: fallback quand Supabase n'est pas configuré
    ═══════════════════════════════════════════════════════════ */
 
 export const MONTHLY = [
-  { mois: "Mai", total: 1782, rdv: 667, sans_rdv: 1115, nouveau: 310, existant: 1222 },
-  { mois: "Juin", total: 1819, rdv: 651, sans_rdv: 1166, nouveau: 338, existant: 1206 },
-  { mois: "Juil", total: 1872, rdv: 670, sans_rdv: 1200, nouveau: 356, existant: 1183 },
-  { mois: "Août", total: 1649, rdv: 496, sans_rdv: 1152, nouveau: 371, existant: 1012 },
-  { mois: "Sep", total: 1619, rdv: 479, sans_rdv: 1140, nouveau: 314, existant: 1023 },
-  { mois: "Oct", total: 1585, rdv: 487, sans_rdv: 1096, nouveau: 314, existant: 992 },
-  { mois: "Nov", total: 1266, rdv: 498, sans_rdv: 767, nouveau: 245, existant: 800 },
-  { mois: "Déc", total: 1105, rdv: 387, sans_rdv: 714, nouveau: 205, existant: 633 },
-  { mois: "Jan", total: 1934, rdv: 582, sans_rdv: 1349, nouveau: 462, existant: 1126 },
-  { mois: "Fév", total: 1424, rdv: 472, sans_rdv: 943, nouveau: 348, existant: 876 },
+  { mois: "Mai", total: 1782, rdv: 667, sans_rdv: 1115, nouveau: 310, existant: 1472 },
+  { mois: "Juin", total: 1819, rdv: 651, sans_rdv: 1168, nouveau: 338, existant: 1481 },
+  { mois: "Juil", total: 1872, rdv: 670, sans_rdv: 1202, nouveau: 356, existant: 1516 },
+  { mois: "Août", total: 1649, rdv: 496, sans_rdv: 1153, nouveau: 371, existant: 1278 },
+  { mois: "Sep", total: 1619, rdv: 479, sans_rdv: 1140, nouveau: 314, existant: 1305 },
+  { mois: "Oct", total: 1585, rdv: 487, sans_rdv: 1098, nouveau: 314, existant: 1271 },
+  { mois: "Nov", total: 1266, rdv: 498, sans_rdv: 768, nouveau: 245, existant: 1021 },
+  { mois: "Déc", total: 1105, rdv: 387, sans_rdv: 718, nouveau: 205, existant: 900 },
+  { mois: "Jan", total: 1934, rdv: 582, sans_rdv: 1352, nouveau: 462, existant: 1472 },
+  { mois: "Fév", total: 2012, rdv: 688, sans_rdv: 1324, nouveau: 467, existant: 1545 },
+  { mois: "Mar", total: 579, rdv: 201, sans_rdv: 378, nouveau: 131, existant: 448 },
 ];
 
 export const DAILY = [
@@ -218,126 +219,140 @@ export const DAILY = [
   { date: "2026-02-17", count: 104 },
   { date: "2026-02-18", count: 88 },
   { date: "2026-02-19", count: 84 },
+  { date: "2026-02-20", count: 95 },
+  { date: "2026-02-21", count: 1 },
+  { date: "2026-02-23", count: 118 },
+  { date: "2026-02-24", count: 99 },
+  { date: "2026-02-25", count: 92 },
+  { date: "2026-02-26", count: 86 },
+  { date: "2026-02-27", count: 97 },
+  { date: "2026-03-02", count: 108 },
+  { date: "2026-03-03", count: 123 },
+  { date: "2026-03-04", count: 121 },
+  { date: "2026-03-05", count: 107 },
+  { date: "2026-03-06", count: 120 },
 ];
 
 export const HOURLY = [
-  { hour: "08h", count: 775 },
-  { hour: "09h", count: 2125 },
-  { hour: "10h", count: 2290 },
-  { hour: "11h", count: 1969 },
-  { hour: "12h", count: 1968 },
-  { hour: "13h", count: 2236 },
-  { hour: "14h", count: 1952 },
-  { hour: "15h", count: 1803 },
-  { hour: "16h", count: 909 },
+  { hour: "08h", count: 853 },
+  { hour: "09h", count: 2282 },
+  { hour: "10h", count: 2466 },
+  { hour: "11h", count: 2112 },
+  { hour: "12h", count: 2103 },
+  { hour: "13h", count: 2395 },
+  { hour: "14h", count: 2085 },
+  { hour: "15h", count: 1926 },
+  { hour: "16h", count: 971 },
 ];
 
 export const SERVICES = [
-  { name: "Accueil et intégration", value: 10570, pct: "65.9%" },
-  { name: "Assermentation", value: 2425, pct: "15.1%" },
-  { name: "Emploi", value: 1950, pct: "12.2%" },
-  { name: "Formation & vie comm.", value: 725, pct: "4.5%" },
-  { name: "Francisation", value: 213, pct: "1.3%" },
-  { name: "Parents-Jeunesse", value: 110, pct: "0.7%" },
-  { name: "Femmes du Monde", value: 47, pct: "0.3%" },
+  { name: "Accueil et intégration", value: 11442, pct: "66.4%" },
+  { name: "Assermentation", value: 2563, pct: "14.9%" },
+  { name: "Emploi", value: 2051, pct: "11.9%" },
+  { name: "Formation & vie comm.", value: 746, pct: "4.3%" },
+  { name: "Francisation", value: 234, pct: "1.4%" },
+  { name: "Parents-Jeunesse", value: 115, pct: "0.7%" },
+  { name: "Femmes du Monde", value: 52, pct: "0.3%" },
 ];
 
 export const STATUTS = [
-  { name: "Demandeur d'asile", value: 5544 },
-  { name: "Résident permanent", value: 2786 },
-  { name: "Dem. d'asile (acc.)", value: 1710 },
-  { name: "Permis de travail", value: 1596 },
-  { name: "Citoyens canadiens", value: 562 },
-  { name: "Permis d'étude", value: 531 },
-  { name: "Visiteurs", value: 69 },
-  { name: "Permis travail fermé", value: 21 },
+  { name: "Demandeur d'asile", value: 5986 },
+  { name: "Non précisé", value: 3242 },
+  { name: "Résident permanent", value: 2944 },
+  { name: "Dem. d'asile (acc.)", value: 1855 },
+  { name: "Permis de travail", value: 1717 },
+  { name: "Citoyens canadiens", value: 600 },
+  { name: "Permis d'étude", value: 568 },
+  { name: "Visiteurs", value: 70 },
+  { name: "Permis travail fermé", value: 22 },
 ];
 
 export const DOW_AVG = [
-  { day: "Lun", avg: 86.9 },
-  { day: "Mar", avg: 85.6 },
-  { day: "Mer", avg: 75.8 },
-  { day: "Jeu", avg: 76.4 },
-  { day: "Ven", avg: 81.0 },
+  { day: "Lun", avg: 88.2 },
+  { day: "Mar", avg: 86.9 },
+  { day: "Mer", avg: 77.3 },
+  { day: "Jeu", avg: 77.4 },
+  { day: "Ven", avg: 82.6 },
 ];
 
 export const HEATMAP_DATA = [
-  { hour: "08h", Lun: 165, Mar: 159, Mer: 164, Jeu: 117, Ven: 169 },
-  { hour: "09h", Lun: 482, Mar: 413, Mer: 405, Jeu: 420, Ven: 405 },
-  { hour: "10h", Lun: 481, Mar: 456, Mer: 455, Jeu: 445, Ven: 453 },
-  { hour: "11h", Lun: 441, Mar: 365, Mer: 346, Jeu: 405, Ven: 412 },
-  { hour: "12h", Lun: 415, Mar: 423, Mer: 347, Jeu: 384, Ven: 399 },
-  { hour: "13h", Lun: 456, Mar: 437, Mer: 429, Jeu: 462, Ven: 452 },
-  { hour: "14h", Lun: 382, Mar: 403, Mer: 374, Jeu: 390, Ven: 403 },
-  { hour: "15h", Lun: 375, Mar: 374, Mer: 337, Jeu: 341, Ven: 376 },
-  { hour: "16h", Lun: 183, Mar: 222, Mer: 175, Jeu: 160, Ven: 169 },
+  { hour: "08h", Lun: 184, Mar: 169, Mer: 171, Jeu: 135, Ven: 193 },
+  { hour: "09h", Lun: 514, Mar: 450, Mer: 433, Jeu: 441, Ven: 444 },
+  { hour: "10h", Lun: 511, Mar: 495, Mer: 487, Jeu: 473, Ven: 499 },
+  { hour: "11h", Lun: 466, Mar: 394, Mer: 371, Jeu: 423, Ven: 458 },
+  { hour: "12h", Lun: 438, Mar: 448, Mer: 378, Jeu: 403, Ven: 435 },
+  { hour: "13h", Lun: 480, Mar: 466, Mer: 466, Jeu: 494, Ven: 489 },
+  { hour: "14h", Lun: 415, Mar: 421, Mer: 397, Jeu: 414, Ven: 438 },
+  { hour: "15h", Lun: 407, Mar: 397, Mer: 359, Jeu: 363, Ven: 400 },
+  { hour: "16h", Lun: 191, Mar: 234, Mer: 183, Jeu: 178, Ven: 185 },
 ];
 
 export const SERVICES_STATUT = [
   {
     service: "Accueil et intégration",
     segments: [
-      { statut: "Demandeur d'asile", value: 5019, pct: 48.3 },
-      { statut: "Résident permanent", value: 1529, pct: 14.7 },
-      { statut: "Dem. d'asile acc.", value: 1504, pct: 14.5 },
-      { statut: "Permis de travail", value: 1457, pct: 14.0 },
-      { statut: "Permis d'étude", value: 489, pct: 4.7 },
+      { statut: "Demandeur d'asile", value: 5424, pct: 47.4 },
+      { statut: "Résident permanent", value: 1642, pct: 14.4 },
+      { statut: "Dem. d'asile acc.", value: 1628, pct: 14.2 },
+      { statut: "Permis de travail", value: 1563, pct: 13.7 },
+      { statut: "Permis d'étude", value: 525, pct: 4.6 },
     ],
   },
   {
     service: "Emploi",
     segments: [
-      { statut: "Résident permanent", value: 1094, pct: 57.4 },
-      { statut: "Demandeur d'asile", value: 347, pct: 18.2 },
-      { statut: "Dem. d'asile acc.", value: 172, pct: 9.0 },
-      { statut: "Citoyens canadiens", value: 168, pct: 8.8 },
-      { statut: "Permis de travail", value: 90, pct: 4.7 },
+      { statut: "Résident permanent", value: 1130, pct: 55.1 },
+      { statut: "Demandeur d'asile", value: 371, pct: 18.1 },
+      { statut: "Dem. d'asile acc.", value: 188, pct: 9.2 },
+      { statut: "Citoyens canadiens", value: 174, pct: 8.5 },
+      { statut: "Permis de travail", value: 102, pct: 5.0 },
     ],
   },
   {
     service: "Formation et vie comm.",
     segments: [
-      { statut: "Résident permanent", value: 98, pct: 35.5 },
-      { statut: "Demandeur d'asile", value: 82, pct: 29.7 },
-      { statut: "Citoyens canadiens", value: 45, pct: 16.3 },
-      { statut: "Permis de travail", value: 24, pct: 8.7 },
-      { statut: "Dem. d'asile acc.", value: 17, pct: 6.2 },
+      { statut: "Non précisé", value: 460, pct: 61.7 },
+      { statut: "Résident permanent", value: 99, pct: 13.3 },
+      { statut: "Demandeur d'asile", value: 86, pct: 11.5 },
+      { statut: "Citoyens canadiens", value: 45, pct: 6.0 },
+      { statut: "Permis de travail", value: 24, pct: 3.2 },
     ],
   },
 ];
 
 export const RDV_PAR_SERVICE = [
-  { name: "Femmes du Monde", avecRdv: 53.2, detail: "25/47" },
-  { name: "Emploi", avecRdv: 47.4, detail: "923/1 947" },
-  { name: "Accueil et intégration", avecRdv: 40.4, detail: "4 269/10 562" },
-  { name: "Parents-Jeunesse", avecRdv: 30.9, detail: "34/110" },
-  { name: "Formation & vie comm.", avecRdv: 13.1, detail: "95/723" },
-  { name: "Francisation", avecRdv: 12.2, detail: "26/213" },
-  { name: "Assermentation", avecRdv: 0.6, detail: "15/2 422" },
+  { name: "Femmes du Monde", avecRdv: 53.8, detail: "28/52" },
+  { name: "Emploi", avecRdv: 47.2, detail: "968/2051" },
+  { name: "Accueil et intégration", avecRdv: 40.5, detail: "4630/11442" },
+  { name: "Parents-Jeunesse", avecRdv: 29.6, detail: "34/115" },
+  { name: "Formation & vie comm.", avecRdv: 13.3, detail: "99/746" },
+  { name: "Francisation", avecRdv: 12.0, detail: "28/234" },
+  { name: "Assermentation", avecRdv: 0.6, detail: "15/2563" },
 ];
 
 export const NOUVEAUX_PAR_STATUT = [
-  { name: "Visiteurs", taux: 83.1, detail: "54/65" },
-  { name: "Permis d'étude", taux: 37.3, detail: "195/523" },
-  { name: "Permis travail fermé", taux: 35.0, detail: "7/20" },
-  { name: "Citoyens canadiens", taux: 31.2, detail: "172/551" },
-  { name: "Demandeur d'asile", taux: 29.0, detail: "1 587/5 466" },
-  { name: "Résident permanent", taux: 20.8, detail: "573/2 755" },
-  { name: "Permis de travail", taux: 19.6, detail: "310/1 580" },
-  { name: "Dem. d'asile (acc.)", taux: 18.9, detail: "319/1 691" },
+  { name: "Visiteurs", taux: 78.6, detail: "55/70" },
+  { name: "Permis d'étude", taux: 36.6, detail: "208/568" },
+  { name: "Permis travail fermé", taux: 36.4, detail: "8/22" },
+  { name: "Citoyens canadiens", taux: 30.7, detail: "184/600" },
+  { name: "Demandeur d'asile", taux: 28.9, detail: "1731/5986" },
+  { name: "Résident permanent", taux: 20.6, detail: "606/2944" },
+  { name: "Permis de travail", taux: 19.3, detail: "331/1717" },
+  { name: "Dem. d'asile (acc.)", taux: 18.3, detail: "339/1855" },
 ];
 
 export const TAUX_NOUVEAUX_MENSUEL = [
-  { mois: "Mai", taux: 20.2 },
-  { mois: "Juin", taux: 21.9 },
-  { mois: "Juil", taux: 23.1 },
-  { mois: "Août", taux: 26.8 },
-  { mois: "Sep", taux: 23.5 },
-  { mois: "Oct", taux: 24.0 },
-  { mois: "Nov", taux: 23.4 },
-  { mois: "Déc", taux: 24.5 },
-  { mois: "Jan", taux: 29.1 },
-  { mois: "Fév", taux: 28.4 },
+  { mois: "Mai", taux: 17.4 },
+  { mois: "Juin", taux: 18.6 },
+  { mois: "Juil", taux: 19.0 },
+  { mois: "Août", taux: 22.5 },
+  { mois: "Sep", taux: 19.4 },
+  { mois: "Oct", taux: 19.8 },
+  { mois: "Nov", taux: 19.4 },
+  { mois: "Déc", taux: 18.6 },
+  { mois: "Jan", taux: 23.9 },
+  { mois: "Fév", taux: 23.2 },
+  { mois: "Mar", taux: 22.6 },
 ];
 
 export const ASILE_MENSUEL = [
@@ -350,5 +365,6 @@ export const ASILE_MENSUEL = [
   { mois: "Nov", visites: 430 },
   { mois: "Déc", visites: 354 },
   { mois: "Jan", visites: 780 },
-  { mois: "Fév", visites: 578 },
+  { mois: "Fév", visites: 815 },
+  { mois: "Mar", visites: 205 },
 ];
