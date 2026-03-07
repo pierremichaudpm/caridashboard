@@ -289,6 +289,25 @@ export default function Saisie() {
           message: msgTexte,
         });
       }
+
+      // Envoyer email au conseiller (fire-and-forget)
+      const conseillerInfo = TOUS_CONSEILLERS.find(c => c.nom === msgConseiller);
+      if (conseillerInfo?.email) {
+        fetch("/.netlify/functions/send-message-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            conseillerNom: msgConseiller,
+            conseillerEmail: conseillerInfo.email,
+            chefEmail: getChefEmail(msgConseiller),
+            nomVisiteur: msgNom,
+            telephone: msgTel || null,
+            reference: msgRef || null,
+            emailVisiteur: msgEmail || null,
+            message: msgTexte,
+          }),
+        }).catch(err => console.warn("Email non envoyé:", err));
+      }
     } catch (err) {
       console.error("Erreur Supabase:", err);
     }
@@ -315,9 +334,12 @@ export default function Saisie() {
       {/* Header */}
       <header className="saisie-header" style={{ padding: "20px 24px", borderBottom: `1px solid ${COLORS.border}`, background: COLORS.card, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
         <img src="/CARI_Horizontal_RGB_reverse.png" alt="CARI" className="saisie-logo" style={{ height: 100 }} />
-        <span className="saisie-title" style={{ fontSize: 26, fontWeight: 700, fontFamily: "'DM Sans', sans-serif" }}>
+        <span className="saisie-title" style={{ fontSize: 26, fontWeight: 700, fontFamily: "'DM Sans', sans-serif", flex: 1 }}>
           {activeTab === "saisie" ? "Saisie des visites" : "Message conseiller"}
         </span>
+        <a href="/messages" style={{ color: COLORS.accent, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
+          Voir messages →
+        </a>
       </header>
 
       {/* Onglets */}
